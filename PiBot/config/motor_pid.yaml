@@ -1,0 +1,46 @@
+motor_control_pid:
+  ros__parameters:
+    # Differential-drive geometry used to convert cmd_vel to wheel rad/s.
+    wheel_radius: 0.079375
+    track_width: 0.130175
+
+    control_frequency: 20.0
+    command_timeout: 0.5
+    encoder_timeout: 0.25
+    # Limit body-command slew before converting it to wheel-speed targets.
+    # At these values, a 0.5 m/s teleop step takes 2 seconds to ramp up.
+    max_linear_acceleration: 2
+    max_angular_acceleration: 0.5
+    velocity_filter_alpha: 0.25
+    max_wheel_speed: 20.0
+    zero_speed_epsilon: 0.02
+
+    # Each wheel is calibrated independently because the motors and drivetrain
+    # have different friction, deadband, and loaded speed.
+    left_kp: 0.015
+    left_ki: 0.04
+    left_kd: 0.0
+    left_feedforward: 0.0
+    right_kp: 0.015
+    right_ki: 0.04
+    right_kd: 0.0
+    right_feedforward: 0.0
+    integral_limit: 8.0
+    # A 1 m/s target requires 12.60 rad/s and about 0.63 feed-forward with the
+    # current wheel radius, so retain control authority above that value.
+    max_motor_command: 1.0
+
+    # Match the verified open-loop wiring: left requires negative motor output
+    # and right requires positive motor output for physical forward motion.
+    # The left encoder decreases while moving forward, so negate its feedback;
+    # the right encoder increases while moving forward.
+    left_motor_direction: -1.0
+    right_motor_direction: 1.0
+    left_encoder_direction: -1.0
+    right_encoder_direction: 1.0
+
+    # Encoder-integrated odometry is published for speed and straightness
+    # verification. No TF is broadcast, avoiding conflict with RF2O.
+    odom_topic: /odom_encoder
+    odom_frame: odom_encoder
+    base_frame: base_link

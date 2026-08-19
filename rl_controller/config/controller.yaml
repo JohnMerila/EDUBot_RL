@@ -1,0 +1,28 @@
+rl_goal_controller:
+  ros__parameters:
+    # Default localization input. The pose and goal frame_id values must match.
+    pose_source_type: odometry
+    pose_topic: /odom
+    velocity_topic: ""
+
+    scan_topic: /scan
+    goal_topic: /goal_pose
+    cmd_vel_topic: /cmd_vel
+    control_frequency: 20.0
+
+    pose_timeout: 0.5
+    scan_timeout: 0.5
+    goal_tolerance: 0.3
+    emergency_stop_distance: 0.19
+    # The A1 laser-frame +x axis points toward its rear cable, which faces the
+    # rear of this robot.
+    laser_yaw_offset: 3.141592653589793
+
+    # These values are part of the training contract; do not change them for
+    # the supplied model without validating the resulting policy behavior.
+    lidar_max_range: 8.0
+    max_linear_speed: 0.8
+    max_angular_speed: 1.5
+    max_linear_accel: 1.5
+    max_angular_accel: 3.0
+    enabled: true

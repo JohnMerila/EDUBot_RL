@@ -1,0 +1,31 @@
+# ROS 2 workspace outputs
+build/
+install/
+log/
+
+# Python-generated files
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Core dumps
+core
+core.*
+
+# ROS bags
+*.bag
+*.db3
+*.mcap
+
+# Training outputs/checkpoints
+events.out.tfevents.*
+model_*.pt
+
+# Local Codex metadata
+.agents/
+.codex/
+
+# Editor and OS files
+.vscode/
+.DS_Store
